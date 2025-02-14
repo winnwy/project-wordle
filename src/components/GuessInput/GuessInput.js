@@ -11,7 +11,6 @@ function GuessInput({ handleSubmitGuess }) {
       window.alert("Please input 5 characters. 💖");
       return;
     }
-    console.log(tentativeGuess);
     handleSubmitGuess(tentativeGuess);
     setTentativeGuess("");
   };
