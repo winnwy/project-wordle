@@ -9,6 +9,7 @@ function GuessInput({ handleSubmitGuess }) {
     event.preventDefault();
     if (tentativeGuess.length !== 5) {
       window.alert("Please input 5 characters. 💖");
+      return;
     }
     console.log(tentativeGuess);
     handleSubmitGuess(tentativeGuess);
