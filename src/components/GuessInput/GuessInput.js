@@ -7,6 +7,9 @@ function GuessInput() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (guess.length !== 5) {
+      window.alert("Please input 5 characters. 💖");
+    }
     console.log(guess);
     setGuess("");
   };
@@ -15,6 +18,9 @@ function GuessInput() {
     <form className="guess-input-wrapper" onSubmit={handleSubmit}>
       <label htmlFor="guess-input">Enter guess: </label>
       <input
+        required
+        minLength={5}
+        maxLength={5}
         id="guess-input"
         value={guess}
         type="text"
