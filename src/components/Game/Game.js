@@ -5,6 +5,7 @@ import { WORDS } from "../../data";
 import GuessInput from "../GuessInput";
 import GuessResults from "../GuessResults";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
+import WinAndLose from "../WinAndLose/WinAndLose";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -13,23 +14,31 @@ console.info({ answer });
 
 function Game() {
   const [guesses, setGuesses] = useState([]);
+  const [gameStatus, setGameStatus] = useState("running");
 
   const handleSubmitGuess = (guess) => {
-    if (guesses.length === NUM_OF_GUESSES_ALLOWED) {
-      window.alert(`You can only guess ${NUM_OF_GUESSES_ALLOWED} times. 😭`);
-      return;
-    }
     const nextGuess = {
       guess: guess,
       index: crypto.randomUUID(),
     };
-    setGuesses([...guesses, nextGuess]);
+    const nextGuesses = [...guesses, nextGuess]
+    setGuesses(nextGuesses);
+    if (guess === answer) {
+      setGameStatus("win");
+    } else if (nextGuesses.length === NUM_OF_GUESSES_ALLOWED) {
+      setGameStatus("lose");
+    }
+  };
+
+  const handleDisableInput = () => {
+    return gameStatus === "win" || gameStatus === "lose";
   };
 
   return (
     <>
-      <GuessResults guesses={guesses} answer={answer} />
-      <GuessInput handleSubmitGuess={handleSubmitGuess} />
+      <GuessResults guesses={guesses} answer={answer}/>
+      <GuessInput handleSubmitGuess={handleSubmitGuess} handleDisableInput={handleDisableInput} />
+      <WinAndLose guessCount={guesses.length} answer={answer} gameStatus={gameStatus}/>
     </>
   );
 }
