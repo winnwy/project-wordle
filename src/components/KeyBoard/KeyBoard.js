@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-function KeyBoard({ answer }) {
+function KeyBoard({ answer, handleSubmitGuess }) {
   const [keyStatuses, setKeyStatuses] = useState({});
   const [numberOfInputLetters, setNumberOfInputLetters] = useState(0);
+  const [guess, setGuess] = useState("");
 
   const checkLetter = (guessLetter, index) => {
     if (guessLetter === answer[index]) {
@@ -16,13 +17,21 @@ function KeyBoard({ answer }) {
 
   const handleClick = (event) => {
     const letter = event.target.textContent;
-    const newStatus = checkLetter(letter, numberOfInputLetters % 5);
+    const newStatus = checkLetter(letter, numberOfInputLetters);
     setKeyStatuses((prev) => ({
       ...prev,
       [letter]: newStatus,
     }));
-    setNumberOfInputLetters(numberOfInputLetters + 1);
-    console.log(numberOfInputLetters);
+    setNumberOfInputLetters((prev) => prev + 1);
+
+    const newGuess = guess + letter;
+    setGuess(newGuess);
+
+    if (newGuess.length === 5) {
+      handleSubmitGuess(newGuess);
+      setGuess("");
+      setNumberOfInputLetters(0);
+    }
   };
 
   const keyBoardKeys = ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"];
@@ -32,7 +41,7 @@ function KeyBoard({ answer }) {
         <div key={rowIndex} className="keyboard-row">
           {row.split("").map((letter, letterIndex) => (
             <button
-              key={letterIndex}
+              key={letter}
               className={`key ${keyStatuses[letter] || ""}`}
               onClick={handleClick}
             >

@@ -18,7 +18,6 @@ function Game() {
   const [guesses, setGuesses] = useState([]);
   const [gameStatus, setGameStatus] = useState("running");
 
-  // For textbox input
   const handleSubmitGuess = (guess) => {
     const nextGuess = {
       guess: guess,
@@ -44,7 +43,7 @@ function Game() {
         handleSubmitGuess={handleSubmitGuess}
         handleDisableInput={handleDisableInput}
       />
-      <KeyBoard answer={answer}/>
+      <KeyBoard answer={answer} handleSubmitGuess={handleSubmitGuess} />
       {gameStatus === "win" && <WonBanner guessCount={guesses.length} />}
       {gameStatus === "lose" && <LostBanner answer={answer} />}
     </>
