@@ -22,7 +22,13 @@ You can directly play the game online at: [Wordle Game](https://project-wordle-j
 ## Current Status
 
 - **Playable**: The game is fully functional! You can input your guesses by typing or using the on-screen keyboard.
-- **Keyboard Feedback**: **Todo**: There’s currently a feature missing—while the game tracks the status of each letter, the on-screen keyboard doesn’t yet update to reflect the status (correct, misplaced, or incorrect) of the letters typed. I will be implementing this feature soon to enhance the gameplay experience.
+- **Keyboard Feedback**: 
+
+  **Todo**:
+
+  There’s currently a feature missing—while the game tracks the status of each letter, the on-screen keyboard doesn’t yet update to reflect the status (correct, misplaced, or incorrect) of the letters typed. I will be implementing this feature soon to enhance the gameplay experience.
+
+  Add a dictionary for validating words.
 
 ## Getting Started
 
