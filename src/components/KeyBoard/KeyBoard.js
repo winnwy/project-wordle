@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function KeyBoard({ answer, handleSubmitGuess }) {
+function KeyBoard({ answer, handleSubmitGuess, handleDisableInput }) {
   const [keyStatuses, setKeyStatuses] = useState({});
   const [numberOfInputLetters, setNumberOfInputLetters] = useState(0);
   const [guess, setGuess] = useState("");
@@ -44,6 +44,7 @@ function KeyBoard({ answer, handleSubmitGuess }) {
               key={letter}
               className={`key ${keyStatuses[letter] || ""}`}
               onClick={handleClick}
+              disabled={handleDisableInput()}
             >
               {letter}
             </button>

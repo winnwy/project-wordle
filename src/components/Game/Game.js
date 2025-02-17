@@ -43,7 +43,7 @@ function Game() {
         handleSubmitGuess={handleSubmitGuess}
         handleDisableInput={handleDisableInput}
       />
-      <KeyBoard answer={answer} handleSubmitGuess={handleSubmitGuess} />
+      <KeyBoard answer={answer} handleSubmitGuess={handleSubmitGuess}  handleDisableInput={handleDisableInput}/>
       {gameStatus === "win" && <WonBanner guessCount={guesses.length} />}
       {gameStatus === "lose" && <LostBanner answer={answer} />}
     </>
