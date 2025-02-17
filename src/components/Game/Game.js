@@ -5,7 +5,8 @@ import { WORDS } from "../../data";
 import GuessInput from "../GuessInput";
 import GuessResults from "../GuessResults";
 import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
-import WinAndLose from "../WinAndLose/WinAndLose";
+import LostBanner from "../LostBanner/LostBanner";
+import WonBanner from "../WonBanner/WonBanner";
 
 // Pick a random word on every pageload.
 const answer = sample(WORDS);
@@ -21,7 +22,7 @@ function Game() {
       guess: guess,
       index: crypto.randomUUID(),
     };
-    const nextGuesses = [...guesses, nextGuess]
+    const nextGuesses = [...guesses, nextGuess];
     setGuesses(nextGuesses);
     if (guess === answer) {
       setGameStatus("win");
@@ -36,9 +37,13 @@ function Game() {
 
   return (
     <>
-      <GuessResults guesses={guesses} answer={answer}/>
-      <GuessInput handleSubmitGuess={handleSubmitGuess} handleDisableInput={handleDisableInput} />
-      <WinAndLose guessCount={guesses.length} answer={answer} gameStatus={gameStatus}/>
+      <GuessResults guesses={guesses} answer={answer} />
+      <GuessInput
+        handleSubmitGuess={handleSubmitGuess}
+        handleDisableInput={handleDisableInput}
+      />
+      {gameStatus === "win" && <WonBanner guessCount={guesses.length} />}
+      {gameStatus === "lose" && <LostBanner answer={answer} />}
     </>
   );
 }
