@@ -16,6 +16,7 @@ function Game() {
   console.info({ answer });
   const [guesses, setGuesses] = useState([]);
   const [gameStatus, setGameStatus] = useState("running");
+  const [keyStatuses, setKeyStatuses] = useState({});
 
   const handleSubmitGuess = (guess) => {
     const nextGuess = {
@@ -40,6 +41,7 @@ function Game() {
     setAnswer(newAnswer);
     setGuesses([]);
     setGameStatus("running");
+    setKeyStatuses({}); // Clear keyboard colors here
   };
 
   return (
@@ -53,6 +55,8 @@ function Game() {
         answer={answer}
         handleSubmitGuess={handleSubmitGuess}
         handleDisableInput={handleDisableInput}
+        keyStatuses={keyStatuses}
+        setKeyStatuses={setKeyStatuses}
       />
       {gameStatus === "win" && (
         <WonBanner guessCount={guesses.length} handleRestart={handleRestart} />

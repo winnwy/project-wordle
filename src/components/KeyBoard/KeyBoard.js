@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 
-function KeyBoard({ answer, handleSubmitGuess, handleDisableInput }) {
-  const [keyStatuses, setKeyStatuses] = useState({});
+function KeyBoard({
+  answer,
+  handleSubmitGuess,
+  handleDisableInput,
+  keyStatuses,
+  setKeyStatuses,
+}) {
   const [numberOfInputLetters, setNumberOfInputLetters] = useState(0);
   const [guess, setGuess] = useState("");
+
+
+  React.useEffect(() => {
+    console.log("KeyBoard component mounted");
+  }, []);
 
   const checkLetter = (guessLetter, index) => {
     if (guessLetter === answer[index]) {
